@@ -27,6 +27,23 @@ public class UserController {
     @GetMapping("add")
     public ResponseEntity add(@RequestParam String first_name, @RequestParam String last_name, @RequestParam String email,
                               @RequestParam String password) {
+
+        if (null == first_name) {
+            return new ResponseEntity("Entrer un prenom", HttpStatus.BAD_REQUEST);
+        }
+
+        if (null == last_name) {
+            return new ResponseEntity("Entrer un nom", HttpStatus.BAD_REQUEST);
+        }
+
+        if (null == email) {
+            return new ResponseEntity("Entrer un email", HttpStatus.BAD_REQUEST);
+        }
+
+        if (null == password) {
+            return new ResponseEntity("Entrer un mot de passe", HttpStatus.BAD_REQUEST);
+        }
+
         try {
             Integer Id = service.add(first_name, last_name, email, password);
             return new ResponseEntity(Id, HttpStatus.OK);
