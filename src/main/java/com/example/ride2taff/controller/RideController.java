@@ -1,5 +1,6 @@
 package com.example.ride2taff.controller;
 
+import com.example.ride2taff.dto.AddRideDto;
 import com.example.ride2taff.dto.RideDto;
 import com.example.ride2taff.entity.RideEntity;
 import com.example.ride2taff.service.RideService;
@@ -67,10 +68,14 @@ public class RideController {
     }
 
     // essai d'une méthode post
+    // créer un dto (AddRideDto) pour la requete avec le format de récuperation des données via le request body
+    // le jour, le mois, l'annéee doivent être séparés. de mm pour l'heure (hr, min, sec)
     @PostMapping("newride")
-    private ResponseEntity newRide(@RequestBody RideEntity ride) {
+    private ResponseEntity newRide(@RequestBody AddRideDto ride) {
+
         try {
-            Integer Id = service.newRide(ride);
+            RideEntity rideConvertToEntity = service.toEntity(ride);
+            Integer Id = service.newRide(rideConvertToEntity);
             return new ResponseEntity(Id, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);

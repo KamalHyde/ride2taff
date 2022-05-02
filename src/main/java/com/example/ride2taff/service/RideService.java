@@ -1,5 +1,6 @@
 package com.example.ride2taff.service;
 
+import com.example.ride2taff.dto.AddRideDto;
 import com.example.ride2taff.dto.RideDto;
 import com.example.ride2taff.entity.RideEntity;
 import com.example.ride2taff.repository.RideRepository;
@@ -65,6 +66,23 @@ public class RideService implements IRideService {
         repository.saveAndFlush(entity);
 
         return entity.getId();
+    }
+
+    // conversion du format AddRideDto envoyé par la requete post en RideEntity pour ajout à la base via la methode newRide
+    @Override
+    public RideEntity toEntity(AddRideDto dto) {
+        RideEntity entity = new RideEntity();
+
+        entity.setDeparture_zip_code(dto.getDeparture_zip_code());
+        entity.setDeparture_city(dto.getDeparture_city());
+        entity.setArrival_zip_code(dto.getArrival_zip_code());
+        entity.setArrival_city(dto.getArrival_city());
+        entity.setNumber_seats(dto.getNumber_seats());
+        entity.setNumber_seats(dto.getNumber_seats());
+        entity.setDeparture_date(LocalDate.of(dto.getYear(), dto.getMonth(), dto.getDay()));
+        entity.setDeparture_time(LocalTime.of(dto.getHour(), dto.getMinute(), 0));
+
+        return entity;
     }
 
     // essai d'une methode post
