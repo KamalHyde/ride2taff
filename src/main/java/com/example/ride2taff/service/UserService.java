@@ -1,5 +1,6 @@
 package com.example.ride2taff.service;
 
+import com.example.ride2taff.dto.NewUserDto;
 import com.example.ride2taff.dto.UserDto;
 import com.example.ride2taff.entity.UserEntity;
 import com.example.ride2taff.repository.UserRepository;
@@ -62,4 +63,24 @@ public class UserService implements IUserService{
         }
         return listFinal;
     }
+
+    @Override
+    public UserEntity toEntity(NewUserDto dto) {
+        UserEntity entity = new UserEntity();
+
+        entity.setFirst_name(dto.getFirst_name());
+        entity.setLast_name(dto.getLast_name());
+        entity.setEmail(dto.getEmail());
+        entity.setPassword(dto.getPassword());
+
+        return entity;
+    }
+    @Override
+    public Integer newUser(UserEntity entity) {
+        entity.setCreated_at(LocalDateTime.now());
+        entity.setUpdated_at(LocalDateTime.now());
+        repository.saveAndFlush(entity);
+        return entity.getId();
+    }
+
 }

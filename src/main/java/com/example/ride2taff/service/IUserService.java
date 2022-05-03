@@ -1,5 +1,6 @@
 package com.example.ride2taff.service;
 
+import com.example.ride2taff.dto.NewUserDto;
 import com.example.ride2taff.dto.UserDto;
 import com.example.ride2taff.entity.UserEntity;
 
@@ -13,4 +14,8 @@ public interface IUserService {
 
     Integer add(String first_name, String last_name, String email,
                 String password);
+
+    Integer newUser(UserEntity dto);
+
+    UserEntity toEntity(NewUserDto dto);
 }

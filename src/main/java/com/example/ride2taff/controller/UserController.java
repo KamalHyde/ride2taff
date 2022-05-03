@@ -1,14 +1,13 @@
 package com.example.ride2taff.controller;
 
+import com.example.ride2taff.dto.NewUserDto;
 import com.example.ride2taff.dto.UserDto;
+import com.example.ride2taff.entity.UserEntity;
 import com.example.ride2taff.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -46,6 +45,33 @@ public class UserController {
 
         try {
             Integer Id = service.add(first_name, last_name, email, password);
+            return new ResponseEntity(Id, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("newuser")
+    public ResponseEntity newUser(@RequestBody NewUserDto dto) {
+        if (null == dto.getFirst_name()) {
+            return new ResponseEntity("Entrer un prenom", HttpStatus.BAD_REQUEST);
+        }
+
+        if (null == dto.getLast_name()) {
+            return new ResponseEntity("Entrer un nom", HttpStatus.BAD_REQUEST);
+        }
+
+        if (null == dto.getEmail()) {
+            return new ResponseEntity("Entrer un email", HttpStatus.BAD_REQUEST);
+        }
+
+        if (null == dto.getPassword()) {
+            return new ResponseEntity("Entrer un mot de passe", HttpStatus.BAD_REQUEST);
+        }
+
+        try {
+            UserEntity entity = service.toEntity(dto);
+            Integer Id = service.newUser(entity);
             return new ResponseEntity(Id, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
