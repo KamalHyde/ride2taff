@@ -75,6 +75,8 @@ public class UserService implements IUserService{
 
         return entity;
     }
+
+
     @Override
     public Integer newUser(UserEntity entity) {
         entity.setCreated_at(LocalDateTime.now());

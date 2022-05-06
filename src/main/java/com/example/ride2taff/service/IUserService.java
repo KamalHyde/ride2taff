@@ -18,4 +18,5 @@ public interface IUserService {
     Integer newUser(UserEntity dto);
 
     UserEntity toEntity(NewUserDto dto);
+
 }
