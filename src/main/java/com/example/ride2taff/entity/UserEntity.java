@@ -2,6 +2,7 @@ package com.example.ride2taff.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -32,6 +33,42 @@ public class UserEntity {
 
     @Column(name = "deleted_at")
     private LocalDateTime deleted_at;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id")
+    private RoleEntity roleEntity;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private List<RateEntity> list_rate_entity;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private List<BookedRideEntity> list_user_bookedride_entity;
+
+    public RoleEntity getRoleEntity() {
+        return roleEntity;
+    }
+
+    public void setRoleEntity(RoleEntity roleEntity) {
+        this.roleEntity = roleEntity;
+    }
+
+    public List<RateEntity> getList_rate_entity() {
+        return list_rate_entity;
+    }
+
+    public void setList_rate_entity(List<RateEntity> list_rate_entity) {
+        this.list_rate_entity = list_rate_entity;
+    }
+
+    public List<BookedRideEntity> getList_user_bookedride_entity() {
+        return list_user_bookedride_entity;
+    }
+
+    public void setList_user_bookedride_entity(List<BookedRideEntity> list_user_bookedride_entity) {
+        this.list_user_bookedride_entity = list_user_bookedride_entity;
+    }
 
     public Integer getId() {
         return id;
