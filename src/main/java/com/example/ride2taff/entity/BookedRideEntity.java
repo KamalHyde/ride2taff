@@ -7,8 +7,9 @@ import javax.persistence.*;
 public class BookedRideEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private String id;
+    private Integer id;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -18,11 +19,11 @@ public class BookedRideEntity {
     @JoinColumn(name = "ride_id")
     private RideEntity ride_entity;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
