@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Table(name = "rides")
@@ -45,6 +46,30 @@ public class RideEntity {
 
     @Column(name = "deleted_at")
     private LocalDateTime deleted_at;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private List<UserEntity> list_user_entity;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ride_id", referencedColumnName = "id")
+    private List<BookedRideEntity> list_ride_bookedride_entity;
+
+    public List<BookedRideEntity> getList_ride_bookedride_entity() {
+        return list_ride_bookedride_entity;
+    }
+
+    public void setList_ride_bookedride_entity(List<BookedRideEntity> list_ride_bookedride_entity) {
+        this.list_ride_bookedride_entity = list_ride_bookedride_entity;
+    }
+
+    public List<UserEntity> getList_user_entity() {
+        return list_user_entity;
+    }
+
+    public void setList_user_entity(List<UserEntity> list_user_entity) {
+        this.list_user_entity = list_user_entity;
+    }
 
     public Integer getId() {
         return id;
