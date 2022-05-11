@@ -12,6 +12,7 @@ public class AddRideDto {
     private Integer hour;
     private Integer minute;
 
+
     public Integer getDeparture_zip_code() {
         return departure_zip_code;
     }
