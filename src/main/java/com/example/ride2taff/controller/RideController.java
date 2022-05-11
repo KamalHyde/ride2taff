@@ -1,10 +1,14 @@
 package com.example.ride2taff.controller;
 
 import com.example.ride2taff.dto.AddRideDto;
+import com.example.ride2taff.dto.DisplaySearchRideDto;
 import com.example.ride2taff.dto.RideDto;
+import com.example.ride2taff.dto.SearchRideDto;
 import com.example.ride2taff.entity.RideEntity;
+import com.example.ride2taff.repository.RideRepository;
 import com.example.ride2taff.service.RideService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.flyway.FlywayDataSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +16,14 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("rides")
 public class RideController {
+
+
+    @Autowired
+    RideRepository repository;
 
     @Autowired
     RideService service;
@@ -80,6 +88,16 @@ public class RideController {
         } catch (Exception e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @PostMapping("searchride")
+    private List <DisplaySearchRideDto> searchRide(@RequestBody SearchRideDto  searchride){
+        LocalDate departureDate = LocalDate.of(searchride.getAnnee(), searchride.getMois(), searchride.getJour());
+        List<RideEntity> listDeparture = repository.searchByZipDate(searchride.getDeparture_zip_code(), departureDate);
+        List<DisplaySearchRideDto> listDisplay = service.toDisplaySearchDto(listDeparture);
+        return listDisplay;
+
+
     }
 
 }

@@ -1,7 +1,9 @@
 package com.example.ride2taff.service;
 
 import com.example.ride2taff.dto.AddRideDto;
+import com.example.ride2taff.dto.DisplaySearchRideDto;
 import com.example.ride2taff.dto.RideDto;
+import com.example.ride2taff.dto.SearchRideDto;
 import com.example.ride2taff.entity.RideEntity;
 import com.example.ride2taff.repository.RideRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,6 +86,25 @@ public class RideService implements IRideService {
 
         return entity;
     }
+
+    @Override
+    public List<DisplaySearchRideDto> toDisplaySearchDto(List<RideEntity> listEntity) {
+        List <DisplaySearchRideDto> listDisplay = new ArrayList<DisplaySearchRideDto>();
+        for (int i=0 ; i<listEntity.size(); i++){
+            RideEntity entity1 = listEntity.get(i);
+            DisplaySearchRideDto displayRideDto = new DisplaySearchRideDto();
+            displayRideDto.setDate(entity1.getDeparture_date());
+            displayRideDto.setTimes(entity1.getDeparture_time());
+            displayRideDto.setSeats(entity1.getNumber_seats());
+            displayRideDto.setDeparture_city(entity1.getDeparture_city());
+            displayRideDto.setDeparture_zip_code(entity1.getDeparture_zip_code());
+
+            listDisplay.add(displayRideDto);
+        }
+
+        return listDisplay;
+    }
+
 
     // essai d'une methode post
     @Override
