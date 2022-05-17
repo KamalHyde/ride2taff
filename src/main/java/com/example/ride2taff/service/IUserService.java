@@ -4,7 +4,6 @@ import com.example.ride2taff.dto.NewUserDto;
 import com.example.ride2taff.dto.UserDto;
 import com.example.ride2taff.entity.UserEntity;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface IUserService {
