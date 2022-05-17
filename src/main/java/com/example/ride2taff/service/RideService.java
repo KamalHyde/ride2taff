@@ -3,11 +3,9 @@ package com.example.ride2taff.service;
 import com.example.ride2taff.dto.AddRideDto;
 import com.example.ride2taff.dto.DisplaySearchRideDto;
 import com.example.ride2taff.dto.RideDto;
-import com.example.ride2taff.dto.SearchRideDto;
 import com.example.ride2taff.entity.RideEntity;
 import com.example.ride2taff.repository.RideRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
