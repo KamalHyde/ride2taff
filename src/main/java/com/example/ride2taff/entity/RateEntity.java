@@ -14,7 +14,7 @@ public class RateEntity {
     private Integer id;
 
     @Column(name = "rate")
-    private String rate;
+    private Integer rate;
 
     @Column(name = "created_at")
     private LocalDateTime created_at;
@@ -37,11 +37,11 @@ public class RateEntity {
         this.id = id;
     }
 
-    public String getRate() {
+    public Integer getRate() {
         return rate;
     }
 
-    public void setRate(String rate) {
+    public void setRate(Integer rate) {
         this.rate = rate;
     }
 
