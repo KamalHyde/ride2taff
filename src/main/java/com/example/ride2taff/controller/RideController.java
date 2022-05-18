@@ -1,16 +1,15 @@
 package com.example.ride2taff.controller;
 
-import com.example.ride2taff.dto.AddRideDto;
-import com.example.ride2taff.dto.DisplaySearchRideDto;
-import com.example.ride2taff.dto.RideDto;
-import com.example.ride2taff.dto.SearchRideDto;
+import com.example.ride2taff.dto.*;
 import com.example.ride2taff.entity.RideEntity;
+import com.example.ride2taff.repository.BookedRideRepository;
 import com.example.ride2taff.repository.RideRepository;
 import com.example.ride2taff.service.RideService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.flyway.FlywayDataSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -26,12 +25,24 @@ public class RideController {
     @Autowired
     RideRepository repository;
 
+
     @Autowired
     RideService service;
 
     @GetMapping("allRides")
     private List<RideDto> getAll() {
         return service.getAll();
+    }
+
+    @GetMapping("ridesbydriver/{id}")
+    private ResponseEntity getAllRidesByDriver(@PathVariable String id) {
+        Integer ID = Integer.parseInt(id);
+        if (null == repository.getAllRidesByDriver(ID)) {
+            return new ResponseEntity("Vous n'avez publié aucune course", HttpStatus.BAD_REQUEST);
+        }
+        List<RidesByDriverDto> list_rides = service.toRidesByDriverDto(repository.getAllRidesByDriver(ID));
+        return new ResponseEntity(list_rides, HttpStatus.OK);
+
     }
 
 
@@ -100,5 +111,6 @@ public class RideController {
 
 
     }
+
 
 }

@@ -32,4 +32,35 @@ public class BookedRideController {
         return new ResponseEntity(list_dto, HttpStatus.OK);
     }
 
+    @GetMapping("sendrequest")
+    private ResponseEntity sendARequestToDriver(@RequestParam Integer ride_id, @RequestParam Integer user_id) {
+        try {
+            bookedride_repository.sendARequestToDriver(ride_id, user_id);
+            return new ResponseEntity("en attente", HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+    @GetMapping("acceptrequest")
+    private ResponseEntity acceptARequest(@RequestParam Integer ride_id, @RequestParam Integer user_id) {
+        try {
+            bookedride_repository.acceptARequest(ride_id, user_id);
+            return new ResponseEntity(true, HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("declinerequest")
+    private ResponseEntity declineARequest(@RequestParam Integer ride_id, @RequestParam Integer user_id) {
+        try {
+            bookedride_repository.declineARequest(ride_id, user_id);
+            return new ResponseEntity(true, HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }
