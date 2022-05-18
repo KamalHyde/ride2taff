@@ -4,6 +4,7 @@ import com.example.ride2taff.dto.AddRideDto;
 import com.example.ride2taff.dto.DisplaySearchRideDto;
 import com.example.ride2taff.dto.RideDto;
 import com.example.ride2taff.entity.RideEntity;
+import com.example.ride2taff.repository.BookedRideRepository;
 import com.example.ride2taff.repository.RideRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,8 @@ public class RideService implements IRideService {
 
     @Autowired
     RideRepository repository;
+    @Autowired
+    BookedRideRepository bookedRideRepository;
 
     @Override
     public RideDto toDto(RideEntity entity) {
@@ -101,6 +104,13 @@ public class RideService implements IRideService {
         }
 
         return listDisplay;
+    }
+
+    @Override
+    public void delete_ride_admin(Integer id) {
+        bookedRideRepository.delete_booked_ride_admin(id);
+        bookedRideRepository.flush();
+        repository.deleteById(id);
     }
 
 
