@@ -19,6 +19,17 @@ public class BookedRideEntity {
     @JoinColumn(name = "ride_id")
     private RideEntity ride_entity;
 
+    @Column(name = "status ")
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public Integer getId() {
         return id;
     }

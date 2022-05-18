@@ -2,6 +2,7 @@ package com.example.ride2taff.controller;
 
 import com.example.ride2taff.dto.NewUserDto;
 import com.example.ride2taff.dto.UserDto;
+import com.example.ride2taff.entity.RideEntity;
 import com.example.ride2taff.entity.UserEntity;
 import com.example.ride2taff.repository.UserRepository;
 import com.example.ride2taff.service.UserService;
@@ -28,6 +29,7 @@ public class UserController {
     public List<UserDto> getAll() {
         return service.getAll();
     }
+
 
     @GetMapping("add")
     public ResponseEntity add(@RequestParam String first_name, @RequestParam String last_name, @RequestParam String email,
