@@ -3,6 +3,7 @@ package com.example.ride2taff.service;
 import com.example.ride2taff.dto.AddRideDto;
 import com.example.ride2taff.dto.DisplaySearchRideDto;
 import com.example.ride2taff.dto.RideDto;
+import com.example.ride2taff.dto.RidesByDriverDto;
 import com.example.ride2taff.entity.RideEntity;
 import com.example.ride2taff.repository.BookedRideRepository;
 import com.example.ride2taff.repository.RideRepository;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -111,6 +113,22 @@ public class RideService implements IRideService {
         bookedRideRepository.delete_booked_ride_admin(id);
         bookedRideRepository.flush();
         repository.deleteById(id);
+
+    public List<RidesByDriverDto> toRidesByDriverDto(List<RideEntity> list_entity) {
+        List<RidesByDriverDto> list_dto = new ArrayList<RidesByDriverDto>();
+
+        for (int i = 0 ; i < list_entity.size() ; i++) {
+            RideEntity entity = list_entity.get(i);
+            RidesByDriverDto dto = new RidesByDriverDto();
+            dto.setDisplayArrivalAddress(entity.getArrival_zip_code() + " " + entity.getArrival_city());
+            dto.setDisplayDepartureAddress(entity.getDeparture_zip_code() + " " + entity.getDeparture_city());
+            dto.setDeparture_date(entity.getDeparture_date());
+            dto.setDeparture_time(entity.getDeparture_time());
+            dto.setId(entity.getId());
+            list_dto.add(dto);
+        }
+
+        return list_dto;
     }
 
 

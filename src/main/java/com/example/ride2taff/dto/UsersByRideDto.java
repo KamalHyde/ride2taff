@@ -6,6 +6,8 @@ import java.time.LocalTime;
 
 public class UsersByRideDto {
 
+    private Integer id;
+
     private String display_departure_address;
 
     private String display_arrival_address;
@@ -20,6 +22,14 @@ public class UsersByRideDto {
 
     public String getDisplay_user_name() {
         return display_user_name;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setDisplay_user_name(String display_user_name) {

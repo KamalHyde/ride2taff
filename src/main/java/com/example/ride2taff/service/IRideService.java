@@ -3,6 +3,7 @@ package com.example.ride2taff.service;
 import com.example.ride2taff.dto.AddRideDto;
 import com.example.ride2taff.dto.DisplaySearchRideDto;
 import com.example.ride2taff.dto.RideDto;
+import com.example.ride2taff.dto.RidesByDriverDto;
 import com.example.ride2taff.entity.RideEntity;
 
 import java.time.LocalDate;
@@ -24,6 +25,8 @@ public interface IRideService {
     List <DisplaySearchRideDto> toDisplaySearchDto(List<RideEntity> entity);
 
     void delete_ride_admin(Integer id);
+
+    List<RidesByDriverDto> toRidesByDriverDto(List<RideEntity> list_entity);
 
 
 

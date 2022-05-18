@@ -1,5 +1,7 @@
 package com.example.ride2taff.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -50,7 +52,19 @@ public class UserEntity {
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private List<RideEntity> list_user_ride_entity;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private List<BookedRideEntity> list_user_bookedride_entity;
+
+    public List<RideEntity> getList_user_ride_entity() {
+        return list_user_ride_entity;
+    }
+
+    public void setList_user_ride_entity(List<RideEntity> list_user_ride_entity) {
+        this.list_user_ride_entity = list_user_ride_entity;
+    }
 
     public RoleEntity getRoleEntity() {
         return roleEntity;
