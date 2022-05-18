@@ -44,6 +44,12 @@ public class UserEntity {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private List<RateEntity> list_rate_entity;
 
+
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private List<RideEntity> list_ride_entity;
+
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private List<RideEntity> list_user_ride_entity;
@@ -146,5 +152,13 @@ public class UserEntity {
 
     public void setDeleted_at(LocalDateTime deleted_at) {
         this.deleted_at = deleted_at;
+    }
+
+    public List<RideEntity> getList_ride_entity() {
+        return list_ride_entity;
+    }
+
+    public void setList_ride_entity(List<RideEntity> list_ride_entity) {
+        this.list_ride_entity = list_ride_entity;
     }
 }

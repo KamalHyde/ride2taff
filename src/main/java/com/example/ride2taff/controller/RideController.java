@@ -108,8 +108,18 @@ public class RideController {
         List<RideEntity> listDeparture = repository.searchByZipDate(searchride.getDeparture_zip_code(), departureDate);
         List<DisplaySearchRideDto> listDisplay = service.toDisplaySearchDto(listDeparture);
         return listDisplay;
+    }
 
+    @GetMapping("delete-ride-admin/{id}")
+    private ResponseEntity deleteRideByIdAdmin(@PathVariable String id){
+        Integer ID = Integer.parseInt(id);
 
+        try {
+            service.delete_ride_admin(ID);
+            return new ResponseEntity(ID, HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
 

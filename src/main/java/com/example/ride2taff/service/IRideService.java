@@ -24,6 +24,8 @@ public interface IRideService {
 
     List <DisplaySearchRideDto> toDisplaySearchDto(List<RideEntity> entity);
 
+    void delete_ride_admin(Integer id);
+
     List<RidesByDriverDto> toRidesByDriverDto(List<RideEntity> list_entity);
 
 

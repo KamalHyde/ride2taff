@@ -51,6 +51,7 @@ public class RideEntity {
     @JoinColumn(name = "user_id")
     private UserEntity user_entity;
 
+
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "ride_id", referencedColumnName = "id")
     private List<BookedRideEntity> list_ride_bookedride_entity;
@@ -68,7 +69,7 @@ public class RideEntity {
     }
 
     public void setList_user_entity(UserEntity list_user_entity) {
-        this.user_entity = list_user_entity;
+        this.user_entity = user_entity;
     }
 
     public Integer getId() {
