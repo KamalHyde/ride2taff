@@ -3,9 +3,12 @@ package com.example.ride2taff.service;
 import com.example.ride2taff.dto.NewUserDto;
 import com.example.ride2taff.dto.UserDto;
 import com.example.ride2taff.entity.UserEntity;
+import com.example.ride2taff.repository.BookedRideRepository;
+import com.example.ride2taff.repository.RideRepository;
 import com.example.ride2taff.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.yaml.snakeyaml.events.Event;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -17,10 +20,16 @@ public class UserService implements IUserService{
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    private BookedRideRepository bookedRideRepository;
+
+    @Autowired
+    private RideRepository rideRepository;
+
     @Override
     public UserDto toDto(UserEntity entity) {
         UserDto dto = new UserDto();
-
+        dto.setId(entity.getId());
         dto.setDisplayName(entity.getFirst_name() + " " + entity.getLast_name());
         dto.setEmail(entity.getEmail());
 
@@ -73,6 +82,16 @@ public class UserService implements IUserService{
 
         return entity;
     }
+
+    @Override
+    public void delete(Integer id) {
+        bookedRideRepository.deleteBookedRideForDeleteUserByAdmin(id);
+        bookedRideRepository.flush();
+        rideRepository.deleteRidesForDeleteUserByAdmin(id);
+        rideRepository.flush();
+        repository.deleteById(id);
+    }
+
 
 
     @Override

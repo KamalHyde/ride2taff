@@ -113,7 +113,8 @@ public class RideService implements IRideService {
         bookedRideRepository.delete_booked_ride_admin(id);
         bookedRideRepository.flush();
         repository.deleteById(id);
-
+    }
+    @Override
     public List<RidesByDriverDto> toRidesByDriverDto(List<RideEntity> list_entity) {
         List<RidesByDriverDto> list_dto = new ArrayList<RidesByDriverDto>();
 

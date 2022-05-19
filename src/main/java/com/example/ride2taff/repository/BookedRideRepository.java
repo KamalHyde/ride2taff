@@ -38,4 +38,9 @@ public interface BookedRideRepository extends JpaRepository<BookedRideEntity, In
     @Query (value = "UPDATE bookedrides SET status = 'refusee' WHERE ride_id = ?1 AND user_id = ?2", nativeQuery = true)
     void declineARequest(Integer ride_id, Integer user_id);
 
+    @Modifying
+    @Transactional
+    @Query (value = "DELETE FROM bookedrides WHERE user_id = ?1", nativeQuery = true)
+    void deleteBookedRideForDeleteUserByAdmin(Integer user_id);
+
 }

@@ -2,9 +2,11 @@ package com.example.ride2taff.repository;
 
 import com.example.ride2taff.entity.RideEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -16,5 +18,10 @@ public interface RideRepository extends JpaRepository<RideEntity, Integer> {
 
     @Query (value = "SELECT * FROM rides WHERE user_id = ?", nativeQuery = true)
     List<RideEntity> getAllRidesByDriver(Integer user_id);
+
+    @Modifying
+    @Transactional
+    @Query (value = "DELETE FROM rides WHERE user_id = ?1", nativeQuery = true)
+    void deleteRidesForDeleteUserByAdmin(Integer user_id);
 
 }

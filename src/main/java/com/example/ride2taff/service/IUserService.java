@@ -18,4 +18,6 @@ public interface IUserService {
 
     UserEntity toEntity(NewUserDto dto);
 
+    void delete (Integer id);
+
 }

@@ -87,7 +87,7 @@ public class UserController {
         }
 
         if (null != repository.existByEmail(dto.getEmail())) {
-           return new ResponseEntity("Email déjà utilisé par un autre utilisateur", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity("Email déjà utilisé par un autre utilisateur", HttpStatus.BAD_REQUEST);
         }
         try {
             UserEntity entity = service.toEntity(dto);
@@ -99,4 +99,16 @@ public class UserController {
 
     }
 
+    @GetMapping("delete/{id}")
+    private ResponseEntity deleteById(@PathVariable String id) {
+        Integer ID = Integer.parseInt(id);
+
+        try {
+            service.delete(ID);
+            return new ResponseEntity("user is delete", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+
+    }
 }
