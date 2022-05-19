@@ -63,4 +63,16 @@ public class BookedRideController {
         }
     }
 
+
+    @DeleteMapping("deleterequest")
+    private ResponseEntity deleterequest(@RequestParam Integer ride_id) {
+        try {
+            bookedride_repository.deleteById(ride_id);
+            return new ResponseEntity(true, HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
 }

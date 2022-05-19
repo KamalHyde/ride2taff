@@ -38,6 +38,9 @@ public class BookedRideService implements IBookedRideService {
             dto.setDisplay_city(entity.getRide_entity().getDeparture_city());
             dto.setDeparture_date(entity.getRide_entity().getDeparture_date());
             dto.setDeparture_time(entity.getRide_entity().getDeparture_time());
+            dto.setStatus(entity.getStatus());
+            dto.setArrival_city(entity.getRide_entity().getArrival_city());
+            dto.setId_request(entity.getId());
             list_dto.add(dto);
         }
 
