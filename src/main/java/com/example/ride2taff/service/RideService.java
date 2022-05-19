@@ -10,6 +10,7 @@ import com.example.ride2taff.repository.RideRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -113,7 +114,9 @@ public class RideService implements IRideService {
         bookedRideRepository.delete_booked_ride_admin(id);
         bookedRideRepository.flush();
         repository.deleteById(id);
+    }
 
+    @Override
     public List<RidesByDriverDto> toRidesByDriverDto(List<RideEntity> list_entity) {
         List<RidesByDriverDto> list_dto = new ArrayList<RidesByDriverDto>();
 
