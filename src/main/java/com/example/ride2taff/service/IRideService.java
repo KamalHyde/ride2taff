@@ -1,9 +1,6 @@
 package com.example.ride2taff.service;
 
-import com.example.ride2taff.dto.AddRideDto;
-import com.example.ride2taff.dto.DisplaySearchRideDto;
-import com.example.ride2taff.dto.RideDto;
-import com.example.ride2taff.dto.RidesByDriverDto;
+import com.example.ride2taff.dto.*;
 import com.example.ride2taff.entity.RideEntity;
 
 import java.time.LocalDate;
@@ -27,6 +24,9 @@ public interface IRideService {
     void delete_ride_admin(Integer id);
 
     List<RidesByDriverDto> toRidesByDriverDto(List<RideEntity> list_entity);
+
+    RideEntity fromRegularRideToRide(RegularRideDto dto);
+    void newRegularRide(RegularRideDto dto);
 
 
 

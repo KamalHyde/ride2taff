@@ -121,5 +121,15 @@ public class RideController {
         }
     }
 
+    @PostMapping("newregularride")
+    private ResponseEntity newRegularRide(@RequestBody RegularRideDto dto) {
+        try {
+            service.newRegularRide(dto);
+            return new ResponseEntity(true, HttpStatus.OK);
+        } catch(Exception e) {
+            return new ResponseEntity(false, HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
 }
