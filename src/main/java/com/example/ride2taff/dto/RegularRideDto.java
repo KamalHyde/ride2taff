@@ -1,18 +1,18 @@
 package com.example.ride2taff.dto;
 
-import org.apache.tomcat.jni.Local;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class AddRideDto {
+public class RegularRideDto {
     private Integer departure_zip_code;
     private String departure_city;
     private Integer arrival_zip_code;
     private String arrival_city;
     private Integer number_seats;
-    private LocalDate departure_date;
     private LocalTime departure_time;
+    private LocalDate start_date;
+    private LocalDate end_date;
+    private String status;
 
     public Integer getDeparture_zip_code() {
         return departure_zip_code;
@@ -54,19 +54,35 @@ public class AddRideDto {
         this.number_seats = number_seats;
     }
 
-    public LocalDate getDeparture_date() {
-        return departure_date;
-    }
-
-    public void setDeparture_date(LocalDate departure_date) {
-        this.departure_date = departure_date;
-    }
-
     public LocalTime getDeparture_time() {
         return departure_time;
     }
 
     public void setDeparture_time(LocalTime departure_time) {
         this.departure_time = departure_time;
+    }
+
+    public LocalDate getStart_date() {
+        return start_date;
+    }
+
+    public void setStart_date(LocalDate start_date) {
+        this.start_date = start_date;
+    }
+
+    public LocalDate getEnd_date() {
+        return end_date;
+    }
+
+    public void setEnd_date(LocalDate end_date) {
+        this.end_date = end_date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
