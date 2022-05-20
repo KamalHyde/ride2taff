@@ -117,6 +117,7 @@ public class RideService implements IRideService {
     @Override
     public List<RidesByDriverDto> toRidesByDriverDto( List<RideEntity> list_entity ) {
 
+
         List<RidesByDriverDto> list_dto = new ArrayList<RidesByDriverDto>();
 
         for (int i = 0 ; i < list_entity.size() ; i++) {
