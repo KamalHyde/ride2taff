@@ -28,4 +28,6 @@ public interface IRideService {
     RideEntity fromRegularRideToRide(RegularRideDto dto);
     void newRegularRide(RegularRideDto dto);
 
+
+
 }

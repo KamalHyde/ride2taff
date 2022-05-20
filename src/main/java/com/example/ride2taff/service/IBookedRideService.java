@@ -11,4 +11,5 @@ public interface IBookedRideService {
 
 
     List<DisplayRidesByUserDto> toDto(List<BookedRideEntity> list_entity);
+
 }

@@ -1,5 +1,7 @@
 package com.example.ride2taff.dto;
 
+import org.springframework.data.relational.core.sql.In;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -13,6 +15,10 @@ public class DisplayRidesByUserDto {
     private LocalDate departure_date;
 
     private LocalTime departure_time;
+    private String status;
+    private String arrival_city;
+
+    private Integer id_request;
 
     public Integer getDeparture_zip_code() {
         return departure_zip_code;
@@ -52,5 +58,29 @@ public class DisplayRidesByUserDto {
 
     public void setDeparture_time(LocalTime departure_time) {
         this.departure_time = departure_time;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getArrival_city() {
+        return arrival_city;
+    }
+
+    public void setArrival_city(String arrival_city) {
+        this.arrival_city = arrival_city;
+    }
+
+    public Integer getId_request() {
+        return id_request;
+    }
+
+    public void setId_request(Integer id_request) {
+        this.id_request = id_request;
     }
 }
