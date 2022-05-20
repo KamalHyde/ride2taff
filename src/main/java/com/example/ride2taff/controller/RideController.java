@@ -104,8 +104,7 @@ public class RideController {
 
     @PostMapping("searchride")
     private List <DisplaySearchRideDto> searchRide(@RequestBody SearchRideDto  searchride){
-        LocalDate departureDate = LocalDate.of(searchride.getAnnee(), searchride.getMois(), searchride.getJour());
-        List<RideEntity> listDeparture = repository.searchByZipDate(searchride.getDeparture_zip_code(), departureDate);
+        List<RideEntity> listDeparture = repository.searchByZipDate(searchride.getDeparture_zip_code(), searchride.getDeparture_date());
         List<DisplaySearchRideDto> listDisplay = service.toDisplaySearchDto(listDeparture);
         return listDisplay;
     }
