@@ -1,10 +1,19 @@
 package com.example.ride2taff.dto;
 
+import java.time.LocalDate;
+
 public class SearchRideDto {
     private Integer departure_zip_code;
-    private Integer jour;
-    private Integer mois;
-    private Integer annee;
+
+    private LocalDate departure_date;
+
+    public LocalDate getDeparture_date() {
+        return departure_date;
+    }
+
+    public void setDeparture_date(LocalDate departure_date) {
+        this.departure_date = departure_date;
+    }
 
     public Integer getDeparture_zip_code() {
         return departure_zip_code;
@@ -14,27 +23,4 @@ public class SearchRideDto {
         this.departure_zip_code = departure_zip_code;
     }
 
-    public Integer getJour() {
-        return jour;
-    }
-
-    public void setJour(Integer jour) {
-        this.jour = jour;
-    }
-
-    public Integer getMois() {
-        return mois;
-    }
-
-    public void setMois(Integer mois) {
-        this.mois = mois;
-    }
-
-    public Integer getAnnee() {
-        return annee;
-    }
-
-    public void setAnnee(Integer annee) {
-        this.annee = annee;
-    }
 }

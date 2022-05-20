@@ -104,8 +104,7 @@ public class RideController {
 
     @PostMapping("searchride")
     private List <DisplaySearchRideDto> searchRide(@RequestBody SearchRideDto  searchride){
-        LocalDate departureDate = LocalDate.of(searchride.getAnnee(), searchride.getMois(), searchride.getJour());
-        List<RideEntity> listDeparture = repository.searchByZipDate(searchride.getDeparture_zip_code(), departureDate);
+        List<RideEntity> listDeparture = repository.searchByZipDate(searchride.getDeparture_zip_code(), searchride.getDeparture_date());
         List<DisplaySearchRideDto> listDisplay = service.toDisplaySearchDto(listDeparture);
         return listDisplay;
     }
@@ -119,6 +118,16 @@ public class RideController {
             return new ResponseEntity(ID, HttpStatus.OK);
         } catch (Exception e){
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("newregularride")
+    private ResponseEntity newRegularRide(@RequestBody RegularRideDto dto) {
+        try {
+            service.newRegularRide(dto);
+            return new ResponseEntity(true, HttpStatus.OK);
+        } catch(Exception e) {
+            return new ResponseEntity(false, HttpStatus.BAD_REQUEST);
         }
     }
 

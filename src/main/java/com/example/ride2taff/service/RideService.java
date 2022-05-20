@@ -1,15 +1,14 @@
 package com.example.ride2taff.service;
 
-import com.example.ride2taff.dto.AddRideDto;
-import com.example.ride2taff.dto.DisplaySearchRideDto;
-import com.example.ride2taff.dto.RideDto;
-import com.example.ride2taff.dto.RidesByDriverDto;
+import com.example.ride2taff.dto.*;
 import com.example.ride2taff.entity.RideEntity;
 import com.example.ride2taff.repository.BookedRideRepository;
 import com.example.ride2taff.repository.RideRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.*;
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -84,8 +83,8 @@ public class RideService implements IRideService {
         entity.setArrival_city(dto.getArrival_city());
         entity.setNumber_seats(dto.getNumber_seats());
         entity.setNumber_seats(dto.getNumber_seats());
-        entity.setDeparture_date(LocalDate.of(dto.getYear(), dto.getMonth(), dto.getDay()));
-        entity.setDeparture_time(LocalTime.of(dto.getHour(), dto.getMinute(), 0));
+        entity.setDeparture_date(dto.getDeparture_date());
+        entity.setDeparture_time(dto.getDeparture_time());
 
         return entity;
     }
@@ -114,8 +113,11 @@ public class RideService implements IRideService {
         bookedRideRepository.flush();
         repository.deleteById(id);
     }
+
     @Override
-    public List<RidesByDriverDto> toRidesByDriverDto(List<RideEntity> list_entity) {
+    public List<RidesByDriverDto> toRidesByDriverDto( List<RideEntity> list_entity ) {
+
+
         List<RidesByDriverDto> list_dto = new ArrayList<RidesByDriverDto>();
 
         for (int i = 0 ; i < list_entity.size() ; i++) {
@@ -141,4 +143,55 @@ public class RideService implements IRideService {
         repository.saveAndFlush(ride);
         return ride.getId();
     }
+
+    @Override
+    public RideEntity fromRegularRideToRide(RegularRideDto dto) {
+        RideEntity ride = new RideEntity();
+        ride.setDeparture_zip_code(dto.getDeparture_zip_code());
+        ride.setDeparture_city(dto.getDeparture_city());
+        ride.setArrival_zip_code(dto.getArrival_zip_code());
+        ride.setArrival_city(dto.getArrival_city());
+        ride.setNumber_seats(dto.getNumber_seats());
+        ride.setCreated_at(LocalDateTime.now());
+        ride.setUpdated_at(LocalDateTime.now());
+        ride.setDeparture_time(dto.getDeparture_time());
+        ride.setStatus(dto.getStatus());
+        ride.setStart_date(dto.getStart_date());
+        ride.setEnd_date(dto.getEnd_date());
+        return ride;
+    }
+
+    @Override
+    public void newRegularRide(RegularRideDto dto) {
+        Period p = Period.between(dto.getStart_date(), dto.getEnd_date());
+        int occurence = 0;
+
+        if(dto.getStatus().equals("quotidien")) {
+            occurence = Math.abs(p.getDays());
+        }
+        if(dto.getStatus().equals("hebdomadaire")) {
+            occurence = Math.round(Math.abs(p.getDays()) / 7);
+        }
+        if(dto.getStatus().equals("mensuel")) {
+            occurence = Math.abs(p.getMonths());
+        }
+        LocalDate date = dto.getStart_date();
+
+        for(int i = 0; i < occurence; i++) {
+            RideEntity ride = this.fromRegularRideToRide(dto);
+            ride.setDeparture_date(date);
+            repository.saveAndFlush(ride);
+            if(dto.getStatus().equals("quotidien")) {
+                date = date.plusDays(1);
+            }
+            if(dto.getStatus().equals("hebdomadaire")) {
+                date = date.plusWeeks(1);
+            }
+            if(dto.getStatus().equals("mensuel")) {
+                date = date.plusMonths(1);
+            }
+
+        }
+    }
+
 }

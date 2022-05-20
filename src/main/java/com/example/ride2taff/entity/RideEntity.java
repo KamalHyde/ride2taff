@@ -47,6 +47,15 @@ public class RideEntity {
     @Column(name = "deleted_at")
     private LocalDateTime deleted_at;
 
+    @Column(name = "start_date")
+    private LocalDate start_date;
+
+    @Column(name = "end_date")
+    private LocalDate end_date;
+
+    @Column(name = "status")
+    private String status;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private UserEntity user_entity;
@@ -56,6 +65,30 @@ public class RideEntity {
     @JoinColumn(name = "ride_id", referencedColumnName = "id")
     private List<BookedRideEntity> list_ride_bookedride_entity;
 
+    public LocalDate getStart_date() {
+        return start_date;
+    }
+
+    public void setStart_date(LocalDate start_date) {
+        this.start_date = start_date;
+    }
+
+    public LocalDate getEnd_date() {
+        return end_date;
+    }
+
+    public void setEnd_date(LocalDate end_date) {
+        this.end_date = end_date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public List<BookedRideEntity> getList_ride_bookedride_entity() {
         return list_ride_bookedride_entity;
     }
@@ -64,11 +97,11 @@ public class RideEntity {
         this.list_ride_bookedride_entity = list_ride_bookedride_entity;
     }
 
-    public UserEntity getList_user_entity() {
+    public UserEntity getUser_entity() {
         return user_entity;
     }
 
-    public void setList_user_entity(UserEntity list_user_entity) {
+    public void setUser_entity(UserEntity list_user_entity) {
         this.user_entity = user_entity;
     }
 
