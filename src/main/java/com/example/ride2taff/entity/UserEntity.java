@@ -36,14 +36,12 @@ public class UserEntity {
     @Column(name = "deleted_at")
     private LocalDateTime deleted_at;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id")
-    private RoleEntity roleEntity;
+    @Column(name = "role")
+    private String role;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private List<RateEntity> list_rate_entity;
-
 
 
     @OneToMany(fetch = FetchType.LAZY)
@@ -66,12 +64,12 @@ public class UserEntity {
         this.list_user_ride_entity = list_user_ride_entity;
     }
 
-    public RoleEntity getRoleEntity() {
-        return roleEntity;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoleEntity(RoleEntity roleEntity) {
-        this.roleEntity = roleEntity;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public List<RateEntity> getList_rate_entity() {

@@ -11,4 +11,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
     @Query(value = "SELECT u.email FROM users u WHERE u.email = ?1", nativeQuery = true)
     String existByEmail(String email);
 
+    UserEntity findFirstByEmail(String email);
+
 }
