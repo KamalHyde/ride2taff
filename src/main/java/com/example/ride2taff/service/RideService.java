@@ -100,6 +100,7 @@ public class RideService implements IRideService {
             displayRideDto.setSeats(entity1.getNumber_seats());
             displayRideDto.setDeparture_city(entity1.getDeparture_city());
             displayRideDto.setDeparture_zip_code(entity1.getDeparture_zip_code());
+            displayRideDto.setId(entity1.getId());
 
             listDisplay.add(displayRideDto);
         }

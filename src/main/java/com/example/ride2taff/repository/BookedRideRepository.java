@@ -25,8 +25,12 @@ public interface BookedRideRepository extends JpaRepository<BookedRideEntity, In
     @Query (value = "DELETE FROM bookedrides WHERE ride_id = ?1", nativeQuery = true)
     void delete_booked_ride_admin(Integer ride_id);
 
-    @Query (value = "UPDATE bookedrides SET status = 'en attente' WHERE ride_id = ?1 AND user_id = ?2", nativeQuery = true)
-    void sendARequestToDriver(Integer ride_id, Integer user_id);
+    // erreur dans la comception de la methode d'envoi d'une demande, réimplémenter dans BookedRideService
+    /* @Query (value = "UPDATE bookedrides SET status = 'en attente' WHERE ride_id = ?1 AND user_id = ?2", nativeQuery = true)
+    void sendARequestToDriver(Integer ride_id, Integer user_id); */
+
+    @Query(value = "SELECT TOP 1* FROM bookedrides WHERE user_id = ?1 AND ride_id = ?2", nativeQuery = true)
+    BookedRideEntity userAlreadySentARequest(Integer user_id, Integer ride_id);
 
     @Modifying
     @Transactional

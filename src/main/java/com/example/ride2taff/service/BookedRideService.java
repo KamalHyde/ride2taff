@@ -47,4 +47,16 @@ public class BookedRideService implements IBookedRideService {
         return list_dto;
     }
 
+    @Override
+    public void sendARequestToDriver(Integer user_id, Integer ride_id) {
+        BookedRideEntity entity = new BookedRideEntity();
+
+        entity.setStatus("en attente");
+        entity.setUser_entity(user_repository.getById(user_id));
+        entity.setRide_entity(ride_repository.getById(ride_id));
+
+        bookedride_repository.saveAndFlush(entity);
+    }
+
+
 }
