@@ -5,6 +5,7 @@ import java.time.LocalTime;
 
 public class DisplaySearchRideDto {
 
+    private Integer id;
     private Integer departure_zip_code;
 
     private LocalDate date;
@@ -17,6 +18,14 @@ public class DisplaySearchRideDto {
 
     public Integer getDeparture_zip_code() {
         return departure_zip_code;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setDeparture_zip_code(Integer departure_zip_code) {

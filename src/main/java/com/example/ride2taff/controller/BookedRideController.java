@@ -33,10 +33,13 @@ public class BookedRideController {
     }
 
     @GetMapping("sendrequest")
-    private ResponseEntity sendARequestToDriver(@RequestParam Integer ride_id, @RequestParam Integer user_id) {
+    private ResponseEntity sendARequestToDriver(@RequestParam Integer user_id, @RequestParam Integer ride_id) {
+        if(null != bookedride_repository.userAlreadySentARequest(user_id, ride_id)) {
+            return new ResponseEntity(false, HttpStatus.BAD_REQUEST);
+        }
         try {
-            bookedride_repository.sendARequestToDriver(ride_id, user_id);
-            return new ResponseEntity("en attente", HttpStatus.OK);
+            bookedride_service.sendARequestToDriver(user_id, ride_id);
+            return new ResponseEntity(true, HttpStatus.OK);
         } catch (Exception e){
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }

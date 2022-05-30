@@ -12,4 +12,6 @@ public interface IBookedRideService {
 
     List<DisplayRidesByUserDto> toDto(List<BookedRideEntity> list_entity);
 
+    void sendARequestToDriver (Integer user_id, Integer ride_id);
+
 }
