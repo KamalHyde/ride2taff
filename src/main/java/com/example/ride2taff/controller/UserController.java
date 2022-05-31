@@ -1,6 +1,8 @@
 package com.example.ride2taff.controller;
 
+import com.example.ride2taff.dto.InformationUserDto;
 import com.example.ride2taff.dto.NewUserDto;
+import com.example.ride2taff.dto.RidesByDriverDto;
 import com.example.ride2taff.dto.UserDto;
 import com.example.ride2taff.entity.RideEntity;
 import com.example.ride2taff.entity.UserEntity;
@@ -111,4 +113,18 @@ public class UserController {
         }
 
     }
+    @GetMapping("get/{id}")
+    public ResponseEntity<InformationUserDto> get(@PathVariable String id) {
+        Integer ID = Integer.parseInt(id);
+        try {
+            UserEntity entity = service.getById(ID);
+
+            InformationUserDto dto = service.informationUserDto(entity);
+
+            return new ResponseEntity(dto, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }
