@@ -6,7 +6,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 
-@EnableWebSecurity
+/*@EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -21,4 +21,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .cors().and().csrf().disable();
     }
-}
+} */
