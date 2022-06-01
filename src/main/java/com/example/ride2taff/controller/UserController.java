@@ -1,5 +1,6 @@
 package com.example.ride2taff.controller;
 
+import com.example.ride2taff.dto.LoginDto;
 import com.example.ride2taff.dto.NewUserDto;
 import com.example.ride2taff.dto.UserDto;
 import com.example.ride2taff.entity.RideEntity;
@@ -28,6 +29,12 @@ public class UserController {
     @GetMapping("all")
     public List<UserDto> getAll() {
         return service.getAll();
+    }
+
+    @PostMapping("login")
+    public Integer getId(@RequestBody LoginDto dto) {
+        UserEntity entity = repository.getUser(dto.getEmail(), dto.getPassword());
+        return entity.getId();
     }
 
 
