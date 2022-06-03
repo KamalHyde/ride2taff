@@ -1,7 +1,5 @@
 package com.example.ride2taff.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;

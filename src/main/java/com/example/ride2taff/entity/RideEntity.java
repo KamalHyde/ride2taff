@@ -101,7 +101,7 @@ public class RideEntity {
         return user_entity;
     }
 
-    public void setUser_entity(UserEntity list_user_entity) {
+    public void setUser_entity(UserEntity user_entity) {
         this.user_entity = user_entity;
     }
 

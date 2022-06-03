@@ -13,6 +13,15 @@ public class AddRideDto {
     private Integer number_seats;
     private LocalDate departure_date;
     private LocalTime departure_time;
+    private Integer user_id;
+
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
+    }
 
     public Integer getDeparture_zip_code() {
         return departure_zip_code;
