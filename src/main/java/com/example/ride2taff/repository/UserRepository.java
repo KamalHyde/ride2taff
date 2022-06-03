@@ -3,9 +3,11 @@ package com.example.ride2taff.repository;
 import com.example.ride2taff.entity.RideEntity;
 import com.example.ride2taff.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -19,6 +21,11 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 
     @Query(value = "SELECT * FROM users WHERE email = ?1 AND password = ?2", nativeQuery = true)
     UserEntity getUser(String email, String password);
+
+    @Modifying
+    @Transactional
+    @Query (value = "UPDATE users SET first_name = ?2, last_name= ?3, email= ?4 WHERE id = ?1", nativeQuery = true)
+    void updateUser(Integer id, String first_name, String last_name, String email);
 
 
 }
