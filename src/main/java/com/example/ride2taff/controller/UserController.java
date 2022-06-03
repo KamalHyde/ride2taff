@@ -37,9 +37,10 @@ public class UserController {
     }
 
     @PostMapping("login")
-    public Integer getId(@RequestBody LoginDto dto) {
-        UserEntity entity = repository.getUser(dto.getEmail(), dto.getPassword());
-        return entity.getId();
+    public UserDto getId(@RequestBody LoginDto login_dto) {
+        UserEntity entity = repository.getUser(login_dto.getEmail(), login_dto.getPassword());
+        UserDto user_dto = service.toDto(entity);
+        return user_dto;
     }
 
 
