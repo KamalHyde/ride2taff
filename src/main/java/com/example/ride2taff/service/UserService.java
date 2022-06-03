@@ -32,6 +32,7 @@ public class UserService implements IUserService{
         dto.setId(entity.getId());
         dto.setDisplayName(entity.getFirst_name() + " " + entity.getLast_name());
         dto.setEmail(entity.getEmail());
+        dto.setRole(entity.getRole());
 
         return dto;
     }
