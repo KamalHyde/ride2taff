@@ -138,6 +138,18 @@ public class UserController {
         }
     }
 
+
+    @GetMapping("validate/{id}")
+    public ResponseEntity<?> validateUserByAdmin(@PathVariable String id) {
+        try {
+            Integer ID = Integer.parseInt(id);
+            repository.validateUserByAdmin(ID);
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
+  }
+
     @GetMapping("edit")
     private ResponseEntity updateProfile(@RequestParam Integer id, @RequestParam String first_name, @RequestParam String last_name, @RequestParam String email){
         if (null == first_name) {
