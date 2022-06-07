@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: "jdbc:sqlserver://poe-cap.database.windows.net;database=ride2taff"
+    username: "mark"
+    password: "Coucou123"
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 1088953237056-5gbllslbra0t94lffl71kt1v4u33og4h.apps.googleusercontent.com
+            client-secret: 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
+            scope: openid, profile, email, plateform
+
+      resourceserver:
+        jwt:
+          issuer-uri: https://accounts.google.com/
+          jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
