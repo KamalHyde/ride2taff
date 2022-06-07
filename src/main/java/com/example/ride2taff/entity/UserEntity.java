@@ -1,6 +1,5 @@
 package com.example.ride2taff.entity;
 
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
