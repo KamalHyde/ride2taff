@@ -131,5 +131,18 @@ public class RideController {
         }
     }
 
+    @GetMapping("delete/{id}")
+    private ResponseEntity deleteById(@PathVariable String id) {
+        Integer ID = Integer.parseInt(id);
+
+        try {
+            service.delete_ride_admin(ID);
+            return new ResponseEntity("ride is delete", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
 
 }

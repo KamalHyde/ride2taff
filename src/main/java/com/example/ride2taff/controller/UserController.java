@@ -138,6 +138,7 @@ public class UserController {
         }
     }
 
+
     @GetMapping("validate/{id}")
     public ResponseEntity<?> validateUserByAdmin(@PathVariable String id) {
         try {
@@ -146,6 +147,29 @@ public class UserController {
             return new ResponseEntity<>(true, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
+  }
+
+    @GetMapping("edit")
+    private ResponseEntity updateProfile(@RequestParam Integer id, @RequestParam String first_name, @RequestParam String last_name, @RequestParam String email){
+        if (null == first_name) {
+            return new ResponseEntity("Entrer un prenom", HttpStatus.BAD_REQUEST);
+        }
+
+        if (null == last_name) {
+            return new ResponseEntity("Entrer un nom", HttpStatus.BAD_REQUEST);
+        }
+
+        if (null == email) {
+            return new ResponseEntity("Entrer un email", HttpStatus.BAD_REQUEST);
+        }
+
+
+        try {
+            repository.updateUser(id, first_name, last_name, email);
+            return new ResponseEntity(true, HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
