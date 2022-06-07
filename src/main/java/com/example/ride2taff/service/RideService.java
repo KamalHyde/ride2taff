@@ -31,9 +31,9 @@ public class RideService implements IRideService {
     @Override
     public RideDto toDto(RideEntity entity) {
         RideDto dto = new RideDto();
-
+        dto.setId((entity.getId()));
         dto.setDisplayDepartureAddress(entity.getArrival_zip_code() + " " + entity.getDeparture_city());
-        dto.setDisplayArrivalAddress(entity.getArrival_zip_code() + " " + entity.getArrival_zip_code());
+        dto.setDisplayArrivalAddress(entity.getArrival_zip_code() + " " + entity.getArrival_city());
         dto.setNumber_seats(entity.getNumber_seats());
         dto.setDeparture_date(entity.getDeparture_date());
         dto.setDeparture_time(entity.getDeparture_time());
@@ -201,5 +201,6 @@ public class RideService implements IRideService {
 
         }
     }
+
 
 }
