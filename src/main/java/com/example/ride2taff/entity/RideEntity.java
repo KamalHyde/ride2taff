@@ -97,13 +97,6 @@ public class RideEntity {
         this.list_ride_bookedride_entity = list_ride_bookedride_entity;
     }
 
-    public UserEntity getUser_entity() {
-        return user_entity;
-    }
-
-    public void setUser_entity(UserEntity user_entity) {
-        this.user_entity = user_entity;
-    }
 
     public Integer getId() {
         return id;
@@ -191,5 +184,13 @@ public class RideEntity {
 
     public void setDeleted_at(LocalDateTime deleted_at) {
         this.deleted_at = deleted_at;
+    }
+
+    public UserEntity getUser_entity() {
+        return user_entity;
+    }
+
+    public void setUser_entity(UserEntity user_entity) {
+        this.user_entity = user_entity;
     }
 }

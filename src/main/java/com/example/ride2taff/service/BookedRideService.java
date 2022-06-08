@@ -3,6 +3,7 @@ package com.example.ride2taff.service;
 import com.example.ride2taff.dto.DisplayRidesByUserDto;
 import com.example.ride2taff.entity.BookedRideEntity;
 import com.example.ride2taff.entity.RideEntity;
+import com.example.ride2taff.entity.UserEntity;
 import com.example.ride2taff.repository.BookedRideRepository;
 import com.example.ride2taff.repository.RideRepository;
 import com.example.ride2taff.repository.UserRepository;
@@ -33,7 +34,12 @@ public class BookedRideService implements IBookedRideService {
         for (int i = 0; i<list_entity.size(); i++){
             DisplayRidesByUserDto dto = new DisplayRidesByUserDto();
             BookedRideEntity entity = list_entity.get(i);
+            //Integer id = list_entity.get(i).getId();
+            //BookedRideEntity entity = bookedride_repository.findById(id).get();
+            //UserEntity userEntity = entity.getUser_entity();
+
             dto.setDisplay_name(entity.getUser_entity().getFirst_name() + " " + entity.getUser_entity().getLast_name());
+            dto.setEmail(entity.getRide_entity().getUser_entity().getEmail());
             dto.setDeparture_zip_code(entity.getRide_entity().getDeparture_zip_code());
             dto.setDisplay_city(entity.getRide_entity().getDeparture_city());
             dto.setDeparture_date(entity.getRide_entity().getDeparture_date());
