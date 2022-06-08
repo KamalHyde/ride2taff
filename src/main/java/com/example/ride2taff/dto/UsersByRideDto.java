@@ -20,6 +20,16 @@ public class UsersByRideDto {
 
     private String display_user_name;
 
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getDisplay_user_name() {
         return display_user_name;
     }
