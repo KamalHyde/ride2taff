@@ -32,7 +32,9 @@ public class UsersByRideService implements IUsersByRideService{
             dto.setDeparture_date(entity.getRide_entity().getDeparture_date());
             dto.setDeparture_time(entity.getRide_entity().getDeparture_time());
             dto.setDisplay_user_name(entity.getUser_entity().getFirst_name() + " " + entity.getUser_entity().getLast_name());
+            dto.setEmail(entity.getUser_entity().getEmail());
             dto.setId(entity.getUser_entity().getId());
+            dto.setStatus(entity.getStatus());
 
             list_users_by_ride_dto.add(dto);
         }

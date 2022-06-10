@@ -4,6 +4,7 @@ import com.example.ride2taff.dto.*;
 import com.example.ride2taff.entity.RideEntity;
 import com.example.ride2taff.repository.BookedRideRepository;
 import com.example.ride2taff.repository.RideRepository;
+import com.example.ride2taff.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,15 +22,18 @@ public class RideService implements IRideService {
 
     @Autowired
     RideRepository repository;
+
+    @Autowired
+    UserRepository user_repository;
     @Autowired
     BookedRideRepository bookedRideRepository;
 
     @Override
     public RideDto toDto(RideEntity entity) {
         RideDto dto = new RideDto();
-
+        dto.setId((entity.getId()));
         dto.setDisplayDepartureAddress(entity.getArrival_zip_code() + " " + entity.getDeparture_city());
-        dto.setDisplayArrivalAddress(entity.getArrival_zip_code() + " " + entity.getArrival_zip_code());
+        dto.setDisplayArrivalAddress(entity.getArrival_zip_code() + " " + entity.getArrival_city());
         dto.setNumber_seats(entity.getNumber_seats());
         dto.setDeparture_date(entity.getDeparture_date());
         dto.setDeparture_time(entity.getDeparture_time());
@@ -85,6 +89,8 @@ public class RideService implements IRideService {
         entity.setNumber_seats(dto.getNumber_seats());
         entity.setDeparture_date(dto.getDeparture_date());
         entity.setDeparture_time(dto.getDeparture_time());
+        entity.setUser_entity(user_repository.getById(dto.getUser_id()));
+
 
         return entity;
     }
@@ -157,6 +163,7 @@ public class RideService implements IRideService {
         ride.setUpdated_at(LocalDateTime.now());
         ride.setDeparture_time(dto.getDeparture_time());
         ride.setStatus(dto.getStatus());
+        ride.setUser_entity(user_repository.getById(dto.getUser_id()));
         ride.setStart_date(dto.getStart_date());
         ride.setEnd_date(dto.getEnd_date());
         return ride;
@@ -194,5 +201,6 @@ public class RideService implements IRideService {
 
         }
     }
+
 
 }

@@ -4,6 +4,15 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class RideDto {
+    private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     private String displayDepartureAddress;
 

@@ -20,6 +20,8 @@ public class DisplayRidesByUserDto {
 
     private Integer id_request;
 
+    private String email;
+
     public Integer getDeparture_zip_code() {
         return departure_zip_code;
     }
@@ -82,5 +84,13 @@ public class DisplayRidesByUserDto {
 
     public void setId_request(Integer id_request) {
         this.id_request = id_request;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
